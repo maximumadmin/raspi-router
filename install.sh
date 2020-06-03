@@ -91,6 +91,7 @@ if [ "$ACTION" = "prepare" ]; then
 
   echo "Configuring packages"
   configure_packages
+  override_ufw_service
 
   echo "Setting up static network names"
   set_network_name "$ETHX0_MAC" ethx0
@@ -102,9 +103,6 @@ if [ "$ACTION" = "prepare" ]; then
   dhcpcd_ignore_device wlnx0
   add_bridge brdx0 ethx0 wlnx0
   configure_bridge brdx0 "$BRDX0_ADDRESS" "$BRDX0_NETMASK"
-
-  echo "Configuring sshd"
-  configure_sshd "$BRDX0_ADDRESS"
 
   echo -e "Next time login as \"${USERNAME}\" and run \"${SCRIPT_NAME} install\"\n"
   reboot_with_warning
@@ -124,6 +122,9 @@ if [ "$ACTION" = "install" ]; then
     add_docker_repository
     install_docker "$USERNAME" "$STORAGE_PATH"
   fi
+
+  echo "Configuring sshd"
+  configure_sshd "$BRDX0_ADDRESS"
 
   echo "Configuring firewall"
   configure_iptables

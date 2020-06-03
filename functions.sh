@@ -386,14 +386,17 @@ function configure_forwarding() {
   sed -i 's/DEFAULT_FORWARD_POLICY="DROP"/DEFAULT_FORWARD_POLICY="ACCEPT"/' /etc/default/ufw
 }
 
-# $1: bridge interface
-function configure_ufw() {
-  # because /etc/ufw is not mounted before ufw.service starts, we need to
-  # override the configuration to make it to start after mounts are ready
+# because /etc/ufw is not mounted before ufw.service starts, we need to override
+# the configuration to make it to start after mounts are ready
+function override_ufw_service() {
   mkdir -p /etc/systemd/system/ufw.service.d
   echo -e "[Unit]\nBefore=\nAfter=local-fs.target" \
     > /etc/systemd/system/ufw.service.d/override.conf
   systemctl daemon-reload
+}
+
+# $1: bridge interface
+function configure_ufw() {
   # 0.0.0.0/0 will force ipv4 only
   ufw allow in on ${1} to 0.0.0.0/0 port 22 proto tcp comment ssh
   # ports 80 and 443 will be used for web admin and also for empty responses
