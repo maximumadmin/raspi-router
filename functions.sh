@@ -431,6 +431,7 @@ function install_pihole() {
     -e "s/{INTERFACE}/${5}/" \
     ./pihole/docker-compose.yml > "${TARGET_DIRECTORY}/docker-compose.yml"
   if [ "${4}" = "yes" ]; then
+    mkdir -p "${TARGET_DIRECTORY}/data/pihole"
     echo "DBFILE=/tmp/pihole-FTL.db" > "${TARGET_DIRECTORY}/data/pihole/pihole-FTL.conf"
   fi
   chown -R "${1}:${1}" "${TARGET_DIRECTORY}"
