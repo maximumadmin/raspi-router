@@ -41,6 +41,8 @@ DOCKER_DATA_PATH=${STORAGE_PATH}/var/lib
 DOCKER_FINGERPRINT="9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88"
 
 INSTALL_PIHOLE=yes
+# store ftl database (which includes query history) at /tmp?
+PIHOLE_VOLATILE_FTL_DB=yes
 # one week is hardcoded atm, edit ftl-flush.py to change this behavior
 PIHOLE_AUTO_VACUUM=yes
 # this is just the time when the vacuum task is gonna start
