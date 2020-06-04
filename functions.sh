@@ -423,7 +423,7 @@ function install_pihole() {
   local TIMEZONE=$(echo "${2}" | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
   local SERVER_IP=$(echo "${3}" | sed -e 's/\./\\\./g')
   mkdir "${TARGET_DIRECTORY}"
-  cp ./pihole/{Makefile,ftl-flush.py,Dockerfile} "${TARGET_DIRECTORY}/"
+  cp ./pihole/{Makefile,Dockerfile} "${TARGET_DIRECTORY}/"
   sed \
     -e "s/{TIMEZONE}/${TIMEZONE}/" \
     -e "s/{WEB_PASSWORD}/${WEB_PASSWORD}/" \
@@ -436,11 +436,6 @@ function install_pihole() {
   fi
   chown -R "${1}:${1}" "${TARGET_DIRECTORY}"
   su ${1} -c "cd '${TARGET_DIRECTORY}' && make"
-}
-
-# $1: start at
-function configure_pihole_auto_vacuum() {
-  echo -e "${1} /usr/bin/docker exec pihole sh -c 'ftl-flush && restartdns'\n" >> /etc/crontab
 }
 
 # enabling overlayfs (non-interactively) using this command will also make the

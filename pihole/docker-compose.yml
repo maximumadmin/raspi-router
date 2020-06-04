@@ -3,9 +3,7 @@ version: '3'
 services:
   pihole:
     container_name: pihole
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: pihole/pihole:v5.0-armhf
     network_mode: 'host'
     environment:
       TZ: '{TIMEZONE}'

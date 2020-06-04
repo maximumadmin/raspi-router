@@ -144,9 +144,6 @@ if [ "$ACTION" = "install" ]; then
   echo "Installing pihole"
   if [ "$INSTALL_DOCKER" = "yes" ] && [ "$INSTALL_PIHOLE" = "yes" ]; then
     install_pihole "$USERNAME" "$TIMEZONE" "$BRDX0_ADDRESS" "$PIHOLE_VOLATILE_FTL_DB" brdx0
-    if [ "$PIHOLE_AUTO_VACUUM" = "yes" ]; then
-      configure_pihole_auto_vacuum "$PIHOLE_VACUUM_AT"
-    fi
   fi
 
   echo "Configuring boot partition"
