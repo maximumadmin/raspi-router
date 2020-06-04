@@ -98,11 +98,5 @@ sudo mkfs.ext4 /dev/sdX3
 
 ### At the PiHole Web Interface
 
-* Keep in mind the first time you connect to the Pi wireless network you will have to set an IP address manually to your client device until DHCP is configured
-* Visit `/admin/settings.php?tab=piholedhcp`
-* Check `DHCP Server Enabled`
-* (Optional) Set desired DHCP ranges
-* (Optional) Configure `Pi-hole domain name`
-* (Recommended) Check `Enable IPv6 support (SLAAC + RA)`
-* (Optional) Set static DHCP addresses (if getting a `04-pihole-static-dhcp.conf` error, it's normal the first time as the file does not exist)
+* (Optional) Configure DHCP at `/admin/settings.php?tab=piholedhcp`
 * (Optional) Visit `/admin/settings.php?tab=dns` and set non-ECS upstream DNS server for better privacy
