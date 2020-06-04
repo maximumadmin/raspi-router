@@ -451,7 +451,7 @@ function wait_for_pihole() {
 # e.g. get_dhcp_range 10.0.0.1 10.0.0.0 24 -> 10.0.0.101\n10.0.0.254
 # $1: router address, $2: subnet address, $3: mask bits
 function get_dhcp_range() {
-  python <<EOF
+  python3 <<EOF
 from ipaddress import IPv4Network
 router_address = '${1}'
 subnet_address = '${2}'
