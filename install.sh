@@ -143,7 +143,8 @@ if [ "$ACTION" = "install" ]; then
 
   echo "Installing pihole"
   if [ "$INSTALL_DOCKER" = "yes" ] && [ "$INSTALL_PIHOLE" = "yes" ]; then
-    install_pihole "$USERNAME" "$TIMEZONE" "$BRDX0_ADDRESS" "$PIHOLE_VOLATILE_FTL_DB" brdx0
+    install_pihole "$USERNAME" "$TIMEZONE" "$BRDX0_ADDRESS" brdx0 \
+      "$PIHOLE_MAXDBDAYS" "$PIHOLE_VOLATILE_FTL_DB"
   fi
 
   echo "Configuring boot partition"

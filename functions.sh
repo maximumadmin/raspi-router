@@ -414,8 +414,8 @@ function configure_hostapd_sleep() {
   echo -e "${1} /bin/systemctl stop ${SERVICE_NAME}\n${2} /bin/systemctl start ${SERVICE_NAME}\n" >> /etc/crontab
 }
 
-# $1: username, $2: timezone, $3: server ip, $4: volatile ftl database?,
-# $5: bridge interface
+# $1: username, $2: timezone, $3: server ip, $4: bridge interface,
+# $5: max db days, $6: volatile database?
 function install_pihole() {
   local USER_HOME=$(eval echo ~${1})
   local TARGET_DIRECTORY="${USER_HOME}/pihole"
@@ -428,11 +428,14 @@ function install_pihole() {
     -e "s/{TIMEZONE}/${TIMEZONE}/" \
     -e "s/{WEB_PASSWORD}/${WEB_PASSWORD}/" \
     -e "s/{SERVER_IP}/${SERVER_IP}/" \
-    -e "s/{INTERFACE}/${5}/" \
+    -e "s/{INTERFACE}/${4}/" \
     ./pihole/docker-compose.yml > "${TARGET_DIRECTORY}/docker-compose.yml"
-  if [ "${4}" = "yes" ]; then
-    mkdir -p "${TARGET_DIRECTORY}/data/pihole"
-    echo "DBFILE=/tmp/pihole-FTL.db" > "${TARGET_DIRECTORY}/data/pihole/pihole-FTL.conf"
+  local CONFIG_DIRECTORY="${TARGET_DIRECTORY}/data/pihole"
+  local FTL_CONF="${CONFIG_DIRECTORY}/pihole-FTL.conf"
+  mkdir -p "$CONFIG_DIRECTORY"
+  echo "MAXDBDAYS=${5}" > "$FTL_CONF"
+  if [ "${6}" = "yes" ]; then
+    echo "DBFILE=/tmp/pihole-FTL.db" >> "$FTL_CONF"
   fi
   chown -R "${1}:${1}" "${TARGET_DIRECTORY}"
   su ${1} -c "cd '${TARGET_DIRECTORY}' && make"

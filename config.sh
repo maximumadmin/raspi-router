@@ -41,6 +41,8 @@ DOCKER_DATA_PATH=${STORAGE_PATH}/var/lib
 DOCKER_FINGERPRINT="9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88"
 
 INSTALL_PIHOLE=yes
+# https://docs.pi-hole.net/ftldns/configfile/#maxdbdays
+PIHOLE_MAXDBDAYS=7
 # store ftl database (which includes query history) at /tmp?
 PIHOLE_VOLATILE_FTL_DB=yes
 
