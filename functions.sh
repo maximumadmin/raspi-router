@@ -423,7 +423,7 @@ function install_pihole() {
   local TIMEZONE=$(echo "${2}" | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
   local SERVER_IP=$(echo "${3}" | sed -e 's/\./\\\./g')
   mkdir "${TARGET_DIRECTORY}"
-  cp ./pihole/{Makefile,Dockerfile} "${TARGET_DIRECTORY}/"
+  cp ./pihole/Makefile "${TARGET_DIRECTORY}/"
   sed \
     -e "s/{TIMEZONE}/${TIMEZONE}/" \
     -e "s/{WEB_PASSWORD}/${WEB_PASSWORD}/" \
