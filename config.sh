@@ -45,6 +45,8 @@ INSTALL_PIHOLE=yes
 PIHOLE_MAXDBDAYS=7
 # store ftl database (which includes query history) at /tmp?
 PIHOLE_VOLATILE_FTL_DB=yes
+PIHOLE_ENABLE_DHCP=yes
+PIHOLE_DHCP_DOMAIN=${HOSTNAME}
 
 # remove installation directory after installation is complete?
 REMOVE_AFTER_INSTALL=yes

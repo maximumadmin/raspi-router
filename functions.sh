@@ -447,6 +447,33 @@ function wait_for_pihole() {
   until docker exec pihole pihole status | grep -m 2 '✓'; do sleep 1; done
 }
 
+# print min and max ip address ranges
+# e.g. get_dhcp_range 10.0.0.1 10.0.0.0 24 -> 10.0.0.101\n10.0.0.254
+# $1: router address, $2: subnet address, $3: mask bits
+function get_dhcp_range() {
+  python <<EOF
+from ipaddress import IPv4Network
+router_address = '${1}'
+subnet_address = '${2}'
+mask_bits = '${3}'
+reserved_addresses = 99
+network = IPv4Network('{}/{}'.format(subnet_address, mask_bits))
+hosts = [str(host) for host in network.hosts() if str(host) != router_address]
+print('{}\n{}'.format(hosts[reserved_addresses], hosts[len(hosts)-1]))
+EOF
+}
+
+# $1: bridge address, $2: bridge netmask, $3: domain name
+function enable_dhcp() {
+  local SUBNET_ADDRESS=$(get_subnet_address "${1}" "${2}")
+  local NETMASK_BITS=$(netmask_to_cidr "${2}")
+  local RANGE=($(get_dhcp_range "$1" "$SUBNET_ADDRESS" "$NETMASK_BITS"))
+  local LEASE_TIME=24
+  # https://github.com/pi-hole/AdminLTE/blob/master/scripts/pi-hole/php/savesettings.php
+  docker exec pihole pihole -a enabledhcp ${RANGE[0]} ${RANGE[1]} ${1} \
+    ${LEASE_TIME} ${3} true false
+}
+
 # enabling overlayfs (non-interactively) using this command will also make the
 # boot partition to be mounted as ro
 # $1: enable|disable

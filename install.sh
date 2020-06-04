@@ -146,6 +146,9 @@ if [ "$ACTION" = "install" ]; then
     install_pihole "$USERNAME" "$TIMEZONE" "$BRDX0_ADDRESS" brdx0 \
       "$PIHOLE_MAXDBDAYS" "$PIHOLE_VOLATILE_FTL_DB"
     wait_for_pihole
+    if [ "$PIHOLE_ENABLE_DHCP" = "yes" ]; then
+      enable_dhcp "$BRDX0_ADDRESS" "$BRDX0_NETMASK" "$PIHOLE_DHCP_DOMAIN"
+    fi
   fi
 
   echo "Configuring boot partition"
