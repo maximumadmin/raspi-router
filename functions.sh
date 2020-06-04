@@ -441,6 +441,12 @@ function install_pihole() {
   su ${1} -c "cd '${TARGET_DIRECTORY}' && make"
 }
 
+# wait for pihole to be ready, "pihole status" will print "✓" twice when pihole
+# is ready, see also https://superuser.com/a/375331
+function wait_for_pihole() {
+  until docker exec pihole pihole status | grep -m 2 '✓'; do sleep 1; done
+}
+
 # enabling overlayfs (non-interactively) using this command will also make the
 # boot partition to be mounted as ro
 # $1: enable|disable

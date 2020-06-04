@@ -94,8 +94,7 @@ sudo mkfs.ext4 /dev/sdX3
 * Copy or download this repository into any directory on the Pi
 * Edit `config.sh` to suit your needs (you can run `install.sh info` to get some useful information)
 * Run `install.sh prepare` and reboot
-* Run `install.sh install` and wait for PiHole to finish configuration, you can use `docker logs -f pihole` to see PiHole status
-* Reboot the Pi
+* Run `install.sh install` and reboot
 
 ### At the PiHole Web Interface
 
