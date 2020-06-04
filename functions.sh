@@ -419,7 +419,7 @@ function configure_hostapd_sleep() {
 function install_pihole() {
   local USER_HOME=$(eval echo ~${1})
   local TARGET_DIRECTORY="${USER_HOME}/pihole"
-  local WEB_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1)
+  local WEB_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
   local TIMEZONE=$(echo "${2}" | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')
   local SERVER_IP=$(echo "${3}" | sed -e 's/\./\\\./g')
   mkdir "${TARGET_DIRECTORY}"
