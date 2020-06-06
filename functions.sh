@@ -411,7 +411,7 @@ function configure_ufw() {
 # $1: stop at, $2: start at
 function configure_hostapd_sleep() {
   local SERVICE_NAME=hostapd@default
-  echo -e "${1} /bin/systemctl stop ${SERVICE_NAME}\n${2} /bin/systemctl start ${SERVICE_NAME}\n" >> /etc/crontab
+  echo -e "${1} root /bin/systemctl stop ${SERVICE_NAME}\n${2} root /bin/systemctl start ${SERVICE_NAME}" >> /etc/crontab
 }
 
 # $1: username, $2: timezone, $3: server ip, $4: bridge interface,
