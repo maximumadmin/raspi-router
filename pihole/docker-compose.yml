@@ -3,7 +3,7 @@ version: '3'
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:v5.0-armhf
+    image: pihole/pihole:v5.1.1-armhf
     network_mode: 'host'
     environment:
       TZ: '{TIMEZONE}'
