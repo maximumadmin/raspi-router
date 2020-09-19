@@ -98,8 +98,8 @@ function configure_packages() {
   # upgrade the system and install utilities
   apt-get update
   apt-get dist-upgrade -y
-  apt-get install -y vim htop tmux bc stress bridge-utils ufw iperf3 wavemon \
-    speedtest-cli hostapd git apt-transport-https ca-certificates curl \
+  apt-get install -y vim htop tmux bc lsof stress bridge-utils ufw iperf3 \
+    wavemon speedtest-cli hostapd git apt-transport-https ca-certificates curl \
     gnupg-agent software-properties-common
   apt-get clean
 }
