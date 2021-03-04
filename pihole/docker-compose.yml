@@ -3,7 +3,7 @@ version: '3'
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:v5.2.1-armhf-buster
+    image: pihole/pihole:v5.7-armhf-buster
     network_mode: 'host'
     environment:
       TZ: '{TIMEZONE}'
@@ -13,6 +13,8 @@ services:
       DNSMASQ_LISTENING: {INTERFACE}
     tmpfs:
       - /tmp
+      - /var/cache
+      - /var/lib/php/sessions
     volumes:
       - './data/pihole:/etc/pihole'
       - './data/dnsmasq.d:/etc/dnsmasq.d'
