@@ -21,6 +21,9 @@ services:
     dns:
       - 127.0.0.1
       - 8.8.8.8
+    cap_drop:
+      - SYS_CHROOT
+      - MKNOD
     cap_add:
       - NET_ADMIN
       - NET_BIND_SERVICE
