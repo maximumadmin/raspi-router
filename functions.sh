@@ -93,14 +93,14 @@ function configure_partition() {
 
 function configure_packages() {
   # remove unnecessary packages
-  apt-get autoremove --purge -y vim-tiny nano triggerhappy dphys-swapfile \
+  apt-get autoremove --purge -y vim-tiny triggerhappy dphys-swapfile \
     unattended-upgrades
   # upgrade the system and install utilities
   apt-get update
   apt-get dist-upgrade -y
-  apt-get install -y vim htop tmux bc lsof stress bridge-utils ufw iperf3 \
-    wavemon speedtest-cli hostapd git apt-transport-https ca-certificates curl \
-    gnupg-agent software-properties-common
+  apt-get install -y vim vim-airline htop tmux bc lsof stress bridge-utils ufw \
+    iperf3 wavemon speedtest-cli hostapd git apt-transport-https \
+    ca-certificates curl gnupg-agent software-properties-common
   apt-get clean
 }
 
