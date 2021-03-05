@@ -140,8 +140,8 @@ function install_docker() {
   mv /var/lib/docker "${PERSISTENT_VAR_LIB}/docker"
   mv /var/lib/containerd "${PERSISTENT_VAR_LIB}/containerd"
   # create bind mounts
-  configure_partition "${PERSISTENT_VAR_LIB}/docker" /var/lib/docker "defaults,relatime,bind"
-  configure_partition "${PERSISTENT_VAR_LIB}/containerd" /var/lib/containerd "defaults,relatime,bind"
+  configure_partition "${PERSISTENT_VAR_LIB}/docker" /var/lib/docker "defaults,noatime,bind"
+  configure_partition "${PERSISTENT_VAR_LIB}/containerd" /var/lib/containerd "defaults,noatime,bind"
   systemctl start docker
 }
 
