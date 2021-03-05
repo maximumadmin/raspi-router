@@ -43,8 +43,9 @@ if [ "$ACTION" = "prepare" ]; then
   echo "Configuring \"root\" account"
   configure_root_account "$DISABLE_ROOT"
 
-  echo "Configuring persistent storage"
-  configure_partition "$STORAGE_PARTITION" "$STORAGE_PATH" "defaults,relatime" 2
+  echo "Configuring partitions"
+  sed -i '/ext4/s/defaults,noatime/defaults,noatime,commit=30/' /etc/fstab
+  configure_partition "$STORAGE_PARTITION" "$STORAGE_PATH" "defaults,noatime,commit=60" 2
   configure_partition "${STORAGE_PATH}/etc/iptables" /etc/iptables "defaults,bind"
   configure_partition "${STORAGE_PATH}/etc/ufw" /etc/ufw "defaults,bind"
   configure_partition "${STORAGE_PATH}/etc/hostapd" /etc/hostapd "defaults,bind"
