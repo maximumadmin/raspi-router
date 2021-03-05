@@ -21,6 +21,13 @@ Internet ----- Router ------------ Raspberry --brdx0           Client PC
 
 ## Partitioning
 
+### Wipe microSD card
+
+```bash
+sudo wipefs -a -f /dev/sdX
+sudo dd if=/dev/zero of=/dev/sdX bs=4096 status=progress
+```
+
 ### Transfer Raspbian image
 
 ```bash
@@ -90,7 +97,10 @@ sudo mkfs.ext4 /dev/sdX3
 
 ### Inside the Pi
 
-* Connect to the internet using `raspi-config`
+* Optional preliminary steps on `raspi-config`
+  * Connect to the internet so you can download this repository
+  * Change keyboard layout to avoid issues when typing a new password
+  * Change the timezone to avoid `apt-get` sync errors
 * Copy or download this repository into any directory on the Pi
 * Edit `config.sh` to suit your needs (you can run `install.sh info` to get some useful information)
 * Run `install.sh prepare` and reboot
