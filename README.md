@@ -17,7 +17,7 @@ Internet ----- Router ------------ Raspberry --brdx0           Client PC
 ## Requirements
 
 * Any Raspberry Pi with 2 wireless adapters
-* [Raspbian](https://www.raspberrypi.org/downloads/raspbian/#:~:text=Raspberry%20Pi%20OS%20(32-bit)%20Lite) Buster (tested with 2020-05-27 release)
+* [Raspberry Pi OS](https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit) Buster (tested with Raspberry Pi OS Lite 2021-01-11 release)
 
 ## Partitioning
 
@@ -28,10 +28,10 @@ sudo wipefs -a -f /dev/sdX
 sudo dd if=/dev/zero of=/dev/sdX bs=4096 status=progress
 ```
 
-### Transfer Raspbian image
+### Transfer Raspberry Pi OS image
 
 ```bash
-sudo dd bs=4M if=raspbian.img of=/dev/sdX conv=fsync status=progress
+sudo dd bs=4M if=raspios.img of=/dev/sdX conv=fsync status=progress
 ```
 
 Example partition layout for different micro sd card sizes (partition sizes below are just recommendations)
@@ -91,7 +91,7 @@ sudo mkfs.ext4 /dev/sdX3
 
 ### On another computer
 
-* Transfer Raspbian image using `dd`
+* Transfer the Raspberry Pi OS image using `dd`
 * Partition manually as mentioned above
 * Create `ssh` file
 
