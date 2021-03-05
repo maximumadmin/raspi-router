@@ -98,9 +98,10 @@ sudo mkfs.ext4 /dev/sdX3
 ### Inside the Pi
 
 * Optional preliminary steps on `raspi-config`
-  * Connect to the internet so you can download this repository
+  * Choose the correct WLAN country
   * Change keyboard layout to avoid issues when typing a new password
   * Change the timezone to avoid `apt-get` sync errors
+* Connect to the internet so you can download this repository
 * Copy or download this repository into any directory on the Pi
 * Edit `config.sh` to suit your needs (you can run `install.sh info` to get some useful information)
 * Run `install.sh prepare` and reboot
