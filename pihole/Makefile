@@ -1,8 +1,9 @@
 CONTAINER_NAME := pihole
 
 default:
+	docker-compose build --pull
 	docker-compose down
-	docker-compose up -d --build
+	docker-compose up -d
 
 log:
 	docker logs -f $(CONTAINER_NAME)
